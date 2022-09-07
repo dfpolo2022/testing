@@ -141,7 +141,28 @@ void main() {
       });
 
   testWidgets(
-      'Widget login autenticación no exitosa', (WidgetTester tester) async {});
+      'Widget login autenticación no exitosa', (WidgetTester tester) async {
+
+        await tester.pumpWidget(const GetMaterialApp(
+        home: LoginScreen(
+        key: Key('LoginScreen'),
+        email: "blank",
+        password: "blank",
+        )));
+
+        expect(find.byKey(const Key('LoginScreen')), findsOneWidget);
+
+        await tester.enterText(find.byKey(const Key('TextFormFieldLoginEmail')), 'a@a.com');
+
+        await tester.enterText(find.byKey(const Key('TextFormFieldLoginPassword')), '123456');
+
+        await tester.tap(find.byKey(const Key('ButtonLoginSubmit')));
+
+        await tester.pumpAndSettle();
+
+        expect(find.text('User or passwor nok'), findsOneWidget);
+
+      });
 
   testWidgets(
       'Widget signUp validación @ email', (WidgetTester tester) async {});

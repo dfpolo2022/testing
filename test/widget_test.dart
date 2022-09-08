@@ -23,21 +23,22 @@ void main() {
 
     expect(find.byKey(const Key('LoginScreen')), findsOneWidget);
 
-    await tester.enterText(find.byKey(const Key('TextFormFieldLoginEmail')), 'a.com');
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldLoginEmail')), 'a.com');
 
-    await tester.enterText(find.byKey(const Key('TextFormFieldLoginPassword')), '12345');
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldLoginPassword')), '12345');
 
     await tester.tap(find.byKey(const Key('ButtonLoginSubmit')));
 
     await tester.pumpAndSettle();
-    
+
     expect(find.text('Enter valid email address'), findsOneWidget);
   });
 
   testWidgets('Widget login validación campo vacio email',
       (WidgetTester tester) async {
-
-        await tester.pumpWidget(const GetMaterialApp(
+    await tester.pumpWidget(const GetMaterialApp(
         home: LoginScreen(
       key: Key('LoginScreen'),
       email: "blank",
@@ -46,19 +47,19 @@ void main() {
 
     expect(find.byKey(const Key('LoginScreen')), findsOneWidget);
 
-    await tester.enterText(find.byKey(const Key('TextFormFieldLoginPassword')), '12345');
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldLoginPassword')), '12345');
 
     await tester.tap(find.byKey(const Key('ButtonLoginSubmit')));
 
     await tester.pumpAndSettle();
-    
-    expect(find.text('Enter email'), findsOneWidget);
 
-      });
+    expect(find.text('Enter email'), findsOneWidget);
+  });
 
   testWidgets('Widget login validación número de caracteres password',
       (WidgetTester tester) async {
-        await tester.pumpWidget(const GetMaterialApp(
+    await tester.pumpWidget(const GetMaterialApp(
         home: LoginScreen(
       key: Key('LoginScreen'),
       email: "blank",
@@ -67,22 +68,23 @@ void main() {
 
     expect(find.byKey(const Key('LoginScreen')), findsOneWidget);
 
-    await tester.enterText(find.byKey(const Key('TextFormFieldLoginEmail')), 'a@a.com');
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldLoginEmail')), 'a@a.com');
 
-    await tester.enterText(find.byKey(const Key('TextFormFieldLoginPassword')), '12345');
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldLoginPassword')), '12345');
 
     await tester.tap(find.byKey(const Key('ButtonLoginSubmit')));
 
     await tester.pumpAndSettle();
-    
-    expect(find.text('Password should have at least 6 characters'), findsOneWidget);
 
-      });
+    expect(find.text('Password should have at least 6 characters'),
+        findsOneWidget);
+  });
 
   testWidgets('Widget login validación campo vacio password',
       (WidgetTester tester) async {
-
-        await tester.pumpWidget(const GetMaterialApp(
+    await tester.pumpWidget(const GetMaterialApp(
         home: LoginScreen(
       key: Key('LoginScreen'),
       email: "blank",
@@ -91,95 +93,328 @@ void main() {
 
     expect(find.byKey(const Key('LoginScreen')), findsOneWidget);
 
-    await tester.enterText(find.byKey(const Key('TextFormFieldLoginEmail')), 'a@a.com');
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldLoginEmail')), 'a@a.com');
 
     await tester.tap(find.byKey(const Key('ButtonLoginSubmit')));
 
     await tester.pumpAndSettle();
-    
+
     expect(find.text('Enter password'), findsOneWidget);
+  });
 
-      });
-
-  testWidgets(
-      'Widget login autenticación exitosa', (WidgetTester tester) async {
-        await tester.pumpWidget(const GetMaterialApp(
+  testWidgets('Widget login autenticación exitosa',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(const GetMaterialApp(
         home: LoginScreen(
-        key: Key('LoginScreen'),
-        email: "blank",
-        password: "blank",
-        )));
+      key: Key('LoginScreen'),
+      email: "blank",
+      password: "blank",
+    )));
 
-        expect(find.byKey(const Key('LoginScreen')), findsOneWidget);
+    expect(find.byKey(const Key('LoginScreen')), findsOneWidget);
 
-        await tester.tap(find.byKey(const Key('ButtonLoginCreateAccount')));
+    await tester.tap(find.byKey(const Key('ButtonLoginCreateAccount')));
 
-        await tester.pumpAndSettle();
+    await tester.pumpAndSettle();
 
-        expect(find.text('Enter account information'), findsOneWidget);
+    expect(find.text('Enter account information'), findsOneWidget);
 
-        await tester.enterText(find.byKey(const Key('TextFormFieldSignUpEmail')), 'a@a.com');
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldSignUpEmail')), 'a@a.com');
 
-        await tester.enterText(find.byKey(const Key('TextFormFieldSignUpPassword')), '123456');
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldSignUpPassword')), '123456');
 
-        await tester.tap(find.byKey(const Key('ButtonSignUpSubmit')));
+    await tester.tap(find.byKey(const Key('ButtonSignUpSubmit')));
 
-        await tester.pumpAndSettle();
+    await tester.pumpAndSettle();
 
-        expect(find.byKey(const Key('LoginScreen')), findsOneWidget);
+    expect(find.byKey(const Key('LoginScreen')), findsOneWidget);
 
-        await tester.enterText(find.byKey(const Key('TextFormFieldLoginEmail')), 'a@a.com');
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldLoginEmail')), 'a@a.com');
 
-        await tester.enterText(find.byKey(const Key('TextFormFieldLoginPassword')), '123456');
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldLoginPassword')), '123456');
 
-        await tester.tap(find.byKey(const Key('ButtonLoginSubmit')));
+    await tester.tap(find.byKey(const Key('ButtonLoginSubmit')));
 
-        await tester.pumpAndSettle();
+    await tester.pumpAndSettle();
 
-        expect(find.byKey(const Key('TextHomeHello')), findsOneWidget);
+    expect(find.byKey(const Key('TextHomeHello')), findsOneWidget);
+  });
 
-      });
-
-  testWidgets(
-      'Widget login autenticación no exitosa', (WidgetTester tester) async {
-
-        await tester.pumpWidget(const GetMaterialApp(
+  testWidgets('Widget login autenticación no exitosa',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(const GetMaterialApp(
         home: LoginScreen(
-        key: Key('LoginScreen'),
-        email: "blank",
-        password: "blank",
-        )));
+      key: Key('LoginScreen'),
+      email: "blank",
+      password: "blank",
+    )));
 
-        expect(find.byKey(const Key('LoginScreen')), findsOneWidget);
+    expect(find.byKey(const Key('LoginScreen')), findsOneWidget);
 
-        await tester.enterText(find.byKey(const Key('TextFormFieldLoginEmail')), 'a@a.com');
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldLoginEmail')), 'a@a.com');
 
-        await tester.enterText(find.byKey(const Key('TextFormFieldLoginPassword')), '123456');
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldLoginPassword')), '123456');
 
-        await tester.tap(find.byKey(const Key('ButtonLoginSubmit')));
+    await tester.tap(find.byKey(const Key('ButtonLoginSubmit')));
 
-        await tester.pumpAndSettle();
+    await tester.pumpAndSettle();
 
-        expect(find.text('User or passwor nok'), findsOneWidget);
+    expect(find.text('User or passwor nok'), findsOneWidget);
+  });
 
-      });
+  testWidgets('Widget signUp validación @ email', (WidgetTester tester) async {
+    await tester.pumpWidget(const GetMaterialApp(
+        home: LoginScreen(
+      key: Key('LoginScreen'),
+      email: "blank",
+      password: "blank",
+    )));
 
-  testWidgets(
-      'Widget signUp validación @ email', (WidgetTester tester) async {});
+    expect(find.byKey(const Key('LoginScreen')), findsOneWidget);
+
+    await tester.tap(find.byKey(const Key('ButtonLoginCreateAccount')));
+
+    await tester.pumpAndSettle();
+
+    expect(find.text('Enter account information'), findsOneWidget);
+
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldSignUpEmail')), 'a.com');
+
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldSignUpPassword')), '123456');
+
+    await tester.tap(find.byKey(const Key('ButtonSignUpSubmit')));
+
+    await tester.pumpAndSettle();
+
+    expect(find.text('Enter valid email address'), findsOneWidget);
+  });
 
   testWidgets('Widget signUp validación campo vacio email',
-      (WidgetTester tester) async {});
+      (WidgetTester tester) async {
+    await tester.pumpWidget(const GetMaterialApp(
+        home: LoginScreen(
+      key: Key('LoginScreen'),
+      email: "blank",
+      password: "blank",
+    )));
+
+    expect(find.byKey(const Key('LoginScreen')), findsOneWidget);
+
+    await tester.tap(find.byKey(const Key('ButtonLoginCreateAccount')));
+
+    await tester.pumpAndSettle();
+
+    expect(find.text('Enter account information'), findsOneWidget);
+
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldSignUpPassword')), '123456');
+
+    await tester.tap(find.byKey(const Key('ButtonSignUpSubmit')));
+
+    await tester.pumpAndSettle();
+
+    expect(find.text('Enter email'), findsOneWidget);
+  });
 
   testWidgets('Widget signUp validación número de caracteres password',
-      (WidgetTester tester) async {});
+      (WidgetTester tester) async {
+    await tester.pumpWidget(const GetMaterialApp(
+        home: LoginScreen(
+      key: Key('LoginScreen'),
+      email: "blank",
+      password: "blank",
+    )));
+
+    expect(find.byKey(const Key('LoginScreen')), findsOneWidget);
+
+    await tester.tap(find.byKey(const Key('ButtonLoginCreateAccount')));
+
+    await tester.pumpAndSettle();
+
+    expect(find.text('Enter account information'), findsOneWidget);
+
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldSignUpEmail')), 'a@a.com');
+
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldSignUpPassword')), '12345');
+
+    await tester.tap(find.byKey(const Key('ButtonSignUpSubmit')));
+
+    await tester.pumpAndSettle();
+
+    expect(find.text('Password should have at least 6 characters'),
+        findsOneWidget);
+  });
 
   testWidgets('Widget signUp validación campo vacio password',
-      (WidgetTester tester) async {});
+      (WidgetTester tester) async {
+    await tester.pumpWidget(const GetMaterialApp(
+        home: LoginScreen(
+      key: Key('LoginScreen'),
+      email: "blank",
+      password: "blank",
+    )));
 
-  testWidgets(
-      'Widget home visualización correo', (WidgetTester tester) async {});
+    expect(find.byKey(const Key('LoginScreen')), findsOneWidget);
 
-  testWidgets('Widget home nevegación detalle', (WidgetTester tester) async {});
+    await tester.tap(find.byKey(const Key('ButtonLoginCreateAccount')));
 
-  testWidgets('Widget home logout', (WidgetTester tester) async {});
+    await tester.pumpAndSettle();
+
+    expect(find.text('Enter account information'), findsOneWidget);
+
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldSignUpEmail')), 'a@a.com');
+
+    await tester.tap(find.byKey(const Key('ButtonSignUpSubmit')));
+
+    await tester.pumpAndSettle();
+
+    expect(find.text('Enter password'), findsOneWidget);
+  });
+
+  testWidgets('Widget home visualización correo', (WidgetTester tester) async {
+    await tester.pumpWidget(const GetMaterialApp(
+        home: LoginScreen(
+      key: Key('LoginScreen'),
+      email: "blank",
+      password: "blank",
+    )));
+
+    expect(find.byKey(const Key('LoginScreen')), findsOneWidget);
+
+    await tester.tap(find.byKey(const Key('ButtonLoginCreateAccount')));
+
+    await tester.pumpAndSettle();
+
+    expect(find.text('Enter account information'), findsOneWidget);
+
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldSignUpEmail')), 'a@a.com');
+
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldSignUpPassword')), '123456');
+
+    await tester.tap(find.byKey(const Key('ButtonSignUpSubmit')));
+
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const Key('LoginScreen')), findsOneWidget);
+
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldLoginEmail')), 'a@a.com');
+
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldLoginPassword')), '123456');
+
+    await tester.tap(find.byKey(const Key('ButtonLoginSubmit')));
+
+    await tester.pumpAndSettle();
+
+    expect(find.text('Hello a@a.com'), findsOneWidget);
+  });
+
+  testWidgets('Widget home nevegación detalle', (WidgetTester tester) async {
+    await tester.pumpWidget(const GetMaterialApp(
+        home: LoginScreen(
+      key: Key('LoginScreen'),
+      email: "blank",
+      password: "blank",
+    )));
+
+    expect(find.byKey(const Key('LoginScreen')), findsOneWidget);
+
+    await tester.tap(find.byKey(const Key('ButtonLoginCreateAccount')));
+
+    await tester.pumpAndSettle();
+
+    expect(find.text('Enter account information'), findsOneWidget);
+
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldSignUpEmail')), 'a@a.com');
+
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldSignUpPassword')), '123456');
+
+    await tester.tap(find.byKey(const Key('ButtonSignUpSubmit')));
+
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const Key('LoginScreen')), findsOneWidget);
+
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldLoginEmail')), 'a@a.com');
+
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldLoginPassword')), '123456');
+
+    await tester.tap(find.byKey(const Key('ButtonLoginSubmit')));
+
+    await tester.pumpAndSettle();
+
+    expect(find.text('Hello a@a.com'), findsOneWidget);
+
+    await tester.tap(find.byKey(const Key('ButtonHomeDetail')));
+
+    await tester.pumpAndSettle();
+
+    expect(find.text('Some detail'), findsOneWidget);
+  });
+
+  testWidgets('Widget home logout', (WidgetTester tester) async {
+    await tester.pumpWidget(const GetMaterialApp(
+        home: LoginScreen(
+      key: Key('LoginScreen'),
+      email: "blank",
+      password: "blank",
+    )));
+
+    expect(find.byKey(const Key('LoginScreen')), findsOneWidget);
+
+    await tester.tap(find.byKey(const Key('ButtonLoginCreateAccount')));
+
+    await tester.pumpAndSettle();
+
+    expect(find.text('Enter account information'), findsOneWidget);
+
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldSignUpEmail')), 'a@a.com');
+
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldSignUpPassword')), '123456');
+
+    await tester.tap(find.byKey(const Key('ButtonSignUpSubmit')));
+
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const Key('LoginScreen')), findsOneWidget);
+
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldLoginEmail')), 'a@a.com');
+
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldLoginPassword')), '123456');
+
+    await tester.tap(find.byKey(const Key('ButtonLoginSubmit')));
+
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const Key('HomePage')), findsOneWidget);
+
+    await tester.tap(find.byKey(const Key('ButtonHomeLogOff')));
+
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const Key('LoginScreen')), findsOneWidget);
+  });
 }

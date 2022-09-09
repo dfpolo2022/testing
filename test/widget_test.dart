@@ -414,5 +414,7 @@ void main() {
     await tester.tap(find.byKey(const Key('ButtonHomeLogOff')));
 
     await tester.pumpAndSettle();
+
+    expect(find.byKey(const Key('LoginScreen')), findsWidgets);
   });
 }
